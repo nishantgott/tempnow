@@ -27,7 +27,6 @@ import { TrainingProgramListComponent } from './pages/training-program-list/trai
 import { CreateTrainingProgramComponent } from './pages/create-training-program/create-training-program.component';
 import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { RecruiterVacancyListComponent } from './recruiter-vacancy-list/recruiter-vacancy-list.component';
-import { ReportComponent } from './pages/report/report.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RoleGuard } from './role.guard';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
@@ -63,7 +62,6 @@ export const routes: Routes = [
     { path: 'create-training-program', component: CreateTrainingProgramComponent, canActivate: [RoleGuard], data: { roles: ['Admin', 'Recruiter'] } },
     { path: 'analytics/:id', component: AnalyticsComponent, canActivate: [RoleGuard], data: { roles: ['Admin', 'Recruiter'] } },
     { path: 'my-vacancies', component: RecruiterVacancyListComponent, canActivate: [RoleGuard], data: { roles: ['Admin', 'Recruiter'] } },
-    { path: 'report/:id', component: ReportComponent, canActivate: [RoleGuard], data: { roles: ['Admin', 'Recruiter'] } },
     { path: 'vacancy/:vacancyId/faq', component: FaqComponent },
     { path: '**', component: NotFoundComponent },
 ];
