@@ -1,0 +1,60 @@
+<div class="p-8 bg-[#F5F5E9]">
+    <!-- Navigation Tabs -->
+    <div class="flex justify-center flex-wrap gap-4 md:gap-16 text-lg md:text-xl font-medium">
+        <a [routerLink]="['/test-exam-list']" class="text-[#40534C] hover:text-[#1A3636]">Tests</a>
+        <a [routerLink]="['/test-exam-list2']"
+            class="text-[#1A3636] font-semibold border-b-4 border-[#1A3636] hover:text-[#40534C]">Exams</a>
+    </div>
+
+    <!-- Exams Section -->
+    <div class="flex flex-col gap-8 p-4 md:p-8" *ngFor="let exam of exams">
+        <div class="bg-[#B2C9AD] p-6 rounded-lg border border-[#40534C] shadow-lg max-w-5xl w-full mx-auto">
+            <!-- Title Section -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center border-b border-[#677D6A] pb-4 gap-4">
+                <svg class="w-12 h-12 text-[#40534C]" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                    <g>
+                        <path opacity="0.48"
+                            d="M6 8.58268V20.8601C6.00024 20.8973 6.01541 20.9329 6.04222 20.9591C6.06902 20.9853 6.10528 21 6.14307 21H11.2988C11.3367 21 11.3731 20.9852 11.4 20.9588C11.4268 20.9324 11.4419 20.8965 11.4419 20.8592V13.6584C11.4418 13.6211 11.4268 13.5853 11.4 13.559L6.24428 8.4832C6.22429 8.46349 6.1988 8.45006 6.17105 8.44462C6.1433 8.43917 6.11453 8.44194 6.08838 8.45259C6.06224 8.46324 6.03988 8.48128 6.02415 8.50443C6.00842 8.52759 6.00001 8.55482 6 8.58268ZM7.2568 12.1294H8.22718C8.27991 12.1294 8.32265 12.2289 8.32265 12.3516V14.6099C8.32265 14.7327 8.27991 14.8321 8.22718 14.8321H7.2568C7.20407 14.8321 7.16133 14.7327 7.16133 14.6099V12.3516C7.16133 12.2289 7.20407 12.1294 7.2568 12.1294Z"
+                            fill-opacity="0.8" fill="#898989"></path>
+                    </g>
+                </svg>
+                <div>
+                    <h2 [routerLink]="['/vacancy',exam.vacancyId]"
+                        class="text-2xl font-semibold text-[#1A3636] hover:cursor-pointer">Vacancy {{
+                        exam.vacancyId }}</h2>
+                </div>
+            </div>
+
+            <!-- Content Section -->
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-[#1A3636] mt-4 border-b border-[#677D6A] pb-4">
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Passing Criteria</h1>
+                    <p>{{ exam.passingCriteria }}</p>
+                </div>
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Total Marks</h1>
+                    <p>{{ exam.totalMarks }}</p>
+                </div>
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Date</h1>
+                    <p>{{ exam.examDate | date }}</p>
+                </div>
+            </div>
+
+            <!-- Actions Section -->
+            <div class="flex flex-col sm:flex-row justify-between items-center mt-4">
+                <div class="rounded-lg px-4 py-2 text-white text-center sm:text-left" [ngClass]="{
+                        'bg-red-500': exam.status === 'Upcoming',
+                        'bg-gray-500': exam.status === 'Completed'
+                    }">
+                    {{ exam.status }}
+                </div>
+                <button [routerLink]="['/vacancy', exam.vacancyId]"
+                    class="px-4 py-2 mt-4 sm:mt-0 bg-[#1A3636] text-[#D6BD98] rounded-lg hover:bg-[#40534C]">
+                    View Job
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

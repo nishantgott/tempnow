@@ -1,0 +1,123 @@
+<div class="min-h-screen bg-[#F5F5E9] p-6">
+    <div class="p-6">
+        <div class="flex justify-center space-x-12 text-xl font-semibold">
+            <a [routerLink]="['/create_vacancy']" class="text-[#40534C] hover:text-[#1A3636]">Vacancy</a>
+            <a [routerLink]="['/create-training-program']"
+                class="text-[#1A3636] border-b-4 border-[#1A3636] pb-1 hover:text-[#40534C]">Training Program</a>
+        </div>
+    </div>
+
+    <div class="max-w-screen-md mx-auto bg-white p-8 rounded-xl shadow-lg border border-[#D6BD98]">
+        <h2 class="text-2xl font-bold mb-6 text-center text-[#1A3636]">Create Training Program</h2>
+
+        <!-- Form starts here -->
+        <form class="space-y-6" #trainingForm="ngForm" (ngSubmit)="onSubmit(trainingForm)">
+
+            <!-- Title -->
+            <div>
+                <label for="title" class="block text-lg font-semibold text-[#40534C]">Title</label>
+                <input id="title" [(ngModel)]="trainingProgram.title" name="title"
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required />
+                <p *ngIf="trainingForm.form.controls['title']?.invalid && trainingForm.form.controls['title']?.touched"
+                    class="text-red-500 text-sm">
+                    Title is required.
+                </p>
+            </div>
+
+            <!-- Training Type -->
+            <div>
+                <label for="trainingType" class="block text-lg font-semibold text-[#40534C]">Training Type</label>
+                <select id="trainingType" [(ngModel)]="trainingProgram.trainingType" name="trainingType"
+                    class="w-full px-4 py-2 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required>
+                    <option value="" disabled>Select your type</option>
+                    <option value="Induction Training">Induction Training</option>
+                    <option value="Physical Training">Physical Training</option>
+                    <option value="Specialized Training">Specialized Training</option>
+                    <option value="Other">Other</option>
+                </select>
+                <p *ngIf="trainingForm.form.controls['trainingType']?.invalid && trainingForm.form.controls['trainingType']?.touched"
+                    class="text-red-500 text-sm">
+                    Training type is required.
+                </p>
+            </div>
+
+            <!-- Select Vacancy -->
+            <div>
+                <label for="vacancyId" class="block text-lg font-semibold text-[#40534C]">Vacancy</label>
+                <select id="vacancyId" [(ngModel)]="trainingProgram.vacancyId" name="vacancyId"
+                    class="w-full px-4 py-2 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required>
+                    <option value="" disabled>Select your vacancy</option>
+                    <option *ngFor="let vacancy of vacancies" [value]="vacancy.vacancyId">{{ vacancy.title }}</option>
+                </select>
+                <p *ngIf="trainingForm.form.controls['vacancyId']?.invalid && trainingForm.form.controls['vacancyId']?.touched"
+                    class="text-red-500 text-sm">
+                    Vacancy is required.
+                </p>
+            </div>
+
+            <!-- Trainer -->
+            <div>
+                <label for="trainer" class="block text-lg font-semibold text-[#40534C]">Trainer</label>
+                <input [(ngModel)]="trainingProgram.trainer" id="trainer" name="trainer"
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required />
+                <p *ngIf="trainingForm.form.controls['trainer']?.invalid && trainingForm.form.controls['trainer']?.touched"
+                    class="text-red-500 text-sm">
+                    Trainer is required.
+                </p>
+            </div>
+
+            <!-- Location -->
+            <div>
+                <label for="location" class="block text-lg font-semibold text-[#40534C]">Location</label>
+                <input [(ngModel)]="trainingProgram.location" id="location" name="location"
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    required />
+                <p *ngIf="trainingForm.form.controls['location']?.invalid && trainingForm.form.controls['location']?.touched"
+                    class="text-red-500 text-sm">
+                    Location is required.
+                </p>
+            </div>
+
+            <!-- Job Details -->
+            <div>
+                <label for="content" class="block text-lg font-semibold text-[#40534C]">Training Details</label>
+                <textarea [(ngModel)]="trainingProgram.content" id="content" name="content"
+                    class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    rows="4" required></textarea>
+                <p *ngIf="trainingForm.form.controls['content']?.invalid && trainingForm.form.controls['content']?.touched"
+                    class="text-red-500 text-sm">
+                    Training details are required.
+                </p>
+            </div>
+
+            <!-- Dates -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="startDate" class="block text-lg font-semibold text-[#40534C]">Start Date</label>
+                    <input [(ngModel)]="trainingProgram.startDate" id="startDate" type="date" name="startDate"
+                        class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                        required />
+                </div>
+                <div>
+                    <label for="endDate" class="block text-lg font-semibold text-[#40534C]">End Date</label>
+                    <input [(ngModel)]="trainingProgram.endDate" id="endDate" name="endDate" type="date"
+                        class="w-full p-3 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                        required />
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit"
+                    class="bg-[#1A3636] text-[#D6BD98] py-3 px-6 rounded-lg w-full text-lg font-medium hover:bg-[#40534C] focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    [disabled]="trainingForm.invalid">
+                    Create Training Program
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

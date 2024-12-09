@@ -1,0 +1,190 @@
+<div class="min-h-screen bg-[#F5F5E9] p-6">
+    <div class="max-w-screen-lg my-10 mx-auto bg-white p-6 rounded-lg shadow-lg border border-[#D6BD98]">
+        <!-- Right Column -->
+        <div class="bg-[#B2C9AD] p-6 rounded-lg shadow-lg flex flex-col items-center gap-4 mb-6">
+            <button (click)="openDocumentModal()"
+                class="bg-[#1A3636] text-[#D6BD98] py-3 px-6 rounded-lg font-bold text-xl shadow-md hover:bg-[#40534C] w-full">
+                Quick Apply
+            </button>
+            <div class="text-[#40534C] text-sm">Deadline: {{ vacancy?.deadline | date: 'shortDate' }}</div>
+            <div class="text-[#1A3636] mt-4">
+                <p class="text-xl font-bold"><strong>{{ vacancy?.appliedCount }}</strong> Applied</p>
+            </div>
+            <div class="flex flex-col items-center mt-6 gap-2">
+                <h1 class="text-xl font-bold text-[#1A3636]">Eligibility Criteria</h1>
+                <h1 class="text-[#40534C] text-lg">{{ vacancy?.eligibilityCriteria }}</h1>
+            </div>
+        </div>
+
+        <!-- Header Section -->
+        <div class="bg-[#B2C9AD] p-6 rounded-lg shadow-lg">
+            <h1 class="text-3xl font-bold text-[#1A3636]">{{ vacancy?.title }}</h1>
+            <p class="text-[#40534C]">
+                <span class="text-xl font-semibold">{{ vacancy?.role }}</span><br>
+                <span>{{ vacancy?.location }}</span><br>
+                <span class="text-sm">Posted On: {{ vacancy?.datePosted | date: 'shortDate' }}</span>
+            </p>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="mt-6 bg-[#B2C9AD] p-4 rounded-lg shadow-lg">
+            <div class="flex gap-6 text-[#1A3636] font-medium">
+                <button class="border-b-4 border-[#1A3636] pb-1">Recruitment Process</button>
+                <button class="hover:text-[#40534C]">Job Description</button>
+                <button class="hover:text-[#40534C]">Dates & Deadlines</button>
+                <button class="hover:text-[#40534C]">Reviews</button>
+                <button class="hover:text-[#40534C]">FAQs & Discussions</button>
+            </div>
+        </div>
+
+        <!-- Recruitment Process Section -->
+        <div class="mt-6 bg-[#B2C9AD] p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-[#1A3636]">Recruitment Process</h2>
+            <div class="mt-4 flex items-center gap-6">
+                <div class="bg-[#D6BD98] text-[#1A3636] font-bold text-xl p-4 rounded-lg shadow-md">
+                    <p>{{ vacancy?.recruitmentDate | date: 'dd' }}</p>
+                    <p class="text-sm">{{ vacancy?.recruitmentDate | date: 'MMM yyyy' }}</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-[#1A3636]">Interview</h3>
+                    <p class="text-[#40534C]">{{ vacancy?.interviewDetails }}</p>
+                    <p class="text-sm text-[#66785F]">Start: {{ vacancy?.interviewStartDate | date: 'medium' }}</p>
+                    <p class="text-sm text-[#66785F]">End: {{ vacancy?.interviewEndDate | date: 'medium' }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Section -->
+        <div class="mt-6 bg-[#B2C9AD] p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-[#1A3636]">Details</h2>
+            <p class="mt-4 text-[#40534C]">{{ vacancy?.jobDetails }}</p>
+        </div>
+
+        <!-- Additional Sections -->
+        <div class="mt-6 bg-[#B2C9AD] p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-semibold text-[#1A3636] mb-4">Additional Information</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Experience -->
+                <div class="flex items-center gap-4 border rounded-lg p-4 bg-[#F5F5F5] shadow-md">
+                    <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/66710a39d5851_experience.png?d=240x172"
+                        alt="Experience" class="w-16">
+                    <div>
+                        <h3 class="text-lg font-bold text-[#1A3636]">Experience</h3>
+                        <p class="text-sm text-[#40534C]">Minimum: {{ vacancy?.experienceMin }} years</p>
+                        <p class="text-sm text-[#40534C]">Maximum: {{ vacancy?.experienceMax }} years</p>
+                    </div>
+                </div>
+
+                <!-- Salary -->
+                <div class="flex items-center gap-4 border rounded-lg p-4 bg-[#F5F5F5] shadow-md">
+                    <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/667109f58b243_salary.png?d=240x172"
+                        alt="Salary" class="w-16">
+                    <div>
+                        <h3 class="text-lg font-bold text-[#1A3636]">Salary</h3>
+                        <p class="text-sm text-[#40534C]">{{ vacancy?.salary | currency }}</p>
+                    </div>
+                </div>
+
+                <!-- Work Detail -->
+                <div class="flex items-center gap-4 border rounded-lg p-4 bg-[#F5F5F5] shadow-md">
+                    <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/667109d710a09_work_detail.png?d=240x172"
+                        alt="Work Detail" class="w-16">
+                    <div>
+                        <h3 class="text-lg font-bold text-[#1A3636]">Work Detail</h3>
+                        <p class="text-sm text-[#40534C]">Working Days: 6 days</p>
+                    </div>
+                </div>
+
+                <!-- Job Type/Timing -->
+                <div class="flex items-center gap-4 border rounded-lg p-4 bg-[#F5F5F5] shadow-md">
+                    <img src="https://d8it4huxumps7.cloudfront.net/uploads/images/667109c430518_job_typetiming.png?d=240x172"
+                        alt="Job Type" class="w-16">
+                    <div>
+                        <h3 class="text-lg font-bold text-[#1A3636]">Job Type/Timing</h3>
+                        <p class="text-sm text-[#40534C]">Role: {{ vacancy?.role }}</p>
+                        <p class="text-sm text-[#40534C]">Timing: Full time</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="mt-6 bg-[#91AC8F] p-6 rounded-lg shadow-lg flex flex-col items-center">
+            <button [routerLink]="['/vacancy', wowId, 'faq']"
+                class="mt-4 bg-[#4B5945] text-[#D6BD98] py-3 px-6 rounded-lg font-medium text-lg shadow-md hover:bg-[#40534C] w-full">
+                Frequently Asked Questions
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal for Document Upload -->
+<div *ngIf="showDocumentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-xl font-bold mb-4">Upload Documents</h2>
+
+        <!-- Document Form -->
+        <form (ngSubmit)="submitDocumentDetails()">
+            <div class="space-y-4">
+                <!-- Document 1 -->
+                <div>
+                    <label for="document1" class="block font-medium text-gray-700">Document 1</label>
+                    <select [(ngModel)]="documentVerification.document1" name="document1" id="document1"
+                        class="border rounded-lg p-2 w-full">
+                        <option value="" disabled>Select a Document</option>
+                        <option value="Aadhar Card">Aadhar Card</option>
+                        <option value="PAN Card">PAN Card</option>
+                        <option value="Driving License">Driving License</option>
+                        <option value="Voter Card">Voter Card</option>
+                        <option value="Resume">Resume</option>
+                    </select>
+                    <input type="text" [(ngModel)]="documentVerification.document1Type" name="document1Type"
+                        placeholder="Document Type" class="border rounded-lg p-2 w-full mt-2">
+                </div>
+
+                <!-- Document 2 -->
+                <div>
+                    <label for="document2" class="block font-medium text-gray-700">Document 2</label>
+                    <select [(ngModel)]="documentVerification.document2" name="document2" id="document2"
+                        class="border rounded-lg p-2 w-full">
+                        <option value="" disabled>Select a Document</option>
+                        <option value="Aadhar Card">Aadhar Card</option>
+                        <option value="PAN Card">PAN Card</option>
+                        <option value="Driving License">Driving License</option>
+                        <option value="Voter Card">Voter Card</option>
+                        <option value="Resume">Resume</option>
+                    </select>
+
+                    <input type="text" [(ngModel)]="documentVerification.document2Type" name="document2Type"
+                        placeholder="Document Type" class="border rounded-lg p-2 w-full mt-2">
+                </div>
+
+                <!-- Document 3 -->
+                <div>
+                    <label for="document3" class="block font-medium text-gray-700">Document 3</label>
+                    <select [(ngModel)]="documentVerification.document3" name="document3" id="document3"
+                        class="border rounded-lg p-2 w-full">
+                        <option value="" disabled>Select a Document</option>
+                        <option value="Aadhar Card">Aadhar Card</option>
+                        <option value="PAN Card">PAN Card</option>
+                        <option value="Driving License">Driving License</option>
+                        <option value="Voter Card">Voter Card</option>
+                        <option value="Resume">Resume</option>
+                    </select>
+                    <input type="text" [(ngModel)]="documentVerification.document3Type" name="document3Type"
+                        placeholder="Document Type" class="border rounded-lg p-2 w-full mt-2">
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-6 flex justify-end gap-4">
+                <button type="button" (click)="closeDocumentModal()"
+                    class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600">Cancel</button>
+                <button type="submit"
+                    class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

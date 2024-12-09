@@ -1,0 +1,6 @@
+<app-header-candidate *ngIf="user?.role === 'Candidate'"></app-header-candidate>
+<app-header-recruiter *ngIf="user?.role === 'Recruiter'"></app-header-recruiter>
+<app-header-medical-officer *ngIf="user?.role === 'MedicalOfficer'"></app-header-medical-officer>
+<app-header-examiner *ngIf="user?.role === 'Examiner'"></app-header-examiner>
+<app-header-admin *ngIf="user?.role === 'Admin'"></app-header-admin>
+<app-header-logged-out *ngIf="!user"></app-header-logged-out>

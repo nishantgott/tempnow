@@ -1,0 +1,95 @@
+<div class="min-h-screen bg-[#F5F5E9] p-6">
+    <div class="flex flex-col items-center gap-6">
+        <!-- Candidate Card -->
+        <app-candidate-card *ngIf="application.userId" [actualUserId]="application.userId"></app-candidate-card>
+
+        <!-- Document Details -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-[#D6BD98] w-full max-w-4xl">
+            <h2 class="text-2xl font-bold text-[#1A3636] mb-6">Document Details</h2>
+
+            <div class="mb-6 border-b border-[#40534C] pb-4">
+                <h3 class="text-lg font-semibold text-[#40534C]">Document 1</h3>
+                <p class="text-[#4B5945]"><strong>Type:</strong> {{ documentVerification?.document1 }}</p>
+                <a href="{{ documentVerification?.document1Type }}" target="_blank"
+                    class="text-blue-500 hover:underline">View Document</a>
+            </div>
+
+            <div class="mb-6 border-b border-[#40534C] pb-4">
+                <h3 class="text-lg font-semibold text-[#40534C]">Document 2</h3>
+                <p class="text-[#4B5945]"><strong>Type:</strong> {{ documentVerification?.document2 }}</p>
+                <a href="{{ documentVerification?.document2Type }}" target="_blank"
+                    class="text-blue-500 hover:underline">View Document</a>
+            </div>
+
+            <div>
+                <h3 class="text-lg font-semibold text-[#40534C]">Document 3</h3>
+                <p class="text-[#4B5945]"><strong>Type:</strong> {{ documentVerification?.document3 }}</p>
+                <a href="{{ documentVerification?.document3Type }}" target="_blank"
+                    class="text-blue-500 hover:underline">View Document</a>
+            </div>
+        </div>
+
+        <!-- Application Details -->
+        <div class="bg-white p-6 rounded-xl shadow-md border border-[#D6BD98] w-full max-w-4xl">
+            <div class="flex gap-6 items-center mb-6 border-b border-[#40534C] pb-4">
+                <svg class="w-12 h-12 text-[#40534C]" viewBox="0 0 24 24" aria-hidden="true">
+                    <!-- SVG content -->
+                </svg>
+                <div>
+                    <h2 class="text-2xl font-bold text-[#1A3636]">{{ vacancy.title }}</h2>
+                    <p class="text-xl text-[#40534C]">{{ vacancy.role }}</p>
+                </div>
+            </div>
+
+            <!-- Job Details -->
+            <div class="grid grid-cols-2 gap-6 mb-6 border-b border-[#40534C] pb-4">
+                <div>
+                    <h3 class="font-semibold text-[#40534C]">Job Type</h3>
+                    <p class="text-[#4B5945]">Full time</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[#40534C]">Salary</h3>
+                    <p class="text-[#4B5945]">{{ vacancy.salary }}</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[#40534C]">Location</h3>
+                    <p class="text-[#4B5945]">{{ vacancy.location }}</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-[#40534C]">Experience</h3>
+                    <p class="text-[#4B5945]">{{ vacancy.experienceMin }}</p>
+                </div>
+            </div>
+
+            <!-- Application Information -->
+            <div class="grid grid-cols-2 gap-6 mb-6 border-b border-[#40534C] pb-4">
+                <div>
+                    <h3 class="font-semibold text-[#40534C]">Applied On</h3>
+                    <p class="text-[#4B5945]">{{ application.submissionDate | date: 'longDate' }}</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-red-500">Status</h3>
+                    <p class="text-[#4B5945]">{{ application.applicationStatus }}</p>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex justify-between">
+                <button [routerLink]="['/vacancy', application.vacancyId]"
+                    class="px-4 py-2 bg-[#677D6A] text-[#D6BD98] rounded-lg hover:bg-[#40534C] focus:outline-none">
+                    View Vacancy
+                </button>
+                <div class="flex space-x-4">
+                    <button (click)="rejectApplication()"
+                        class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none">
+                        Reject
+                    </button>
+                    <button (click)="acceptApplication()"
+                        class="px-4 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg hover:bg-[#40534C] focus:outline-none">
+                        Approve
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

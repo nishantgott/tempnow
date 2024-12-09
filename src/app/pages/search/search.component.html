@@ -1,0 +1,105 @@
+<div class="min-h-screen bg-[#F5F5E9] p-6">
+
+    <!-- Search Form -->
+    <div class="flex justify-center items-center gap-6 ">
+        <input (keydown.enter)="searchVacancies()" type="text" [(ngModel)]="searchTerm"
+            placeholder="Search Opportunities by title, role, or job description"
+            class="my-10 w-full max-w-6xl mx-20 px-6 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <!-- Filter Section -->
+    <div class="p-6 mb-8 align-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Role Filter -->
+            <div>
+                <label for="role" class="block text-lg font-medium text-[#40534C]">Role</label>
+                <select id="role" [(ngModel)]="selectedRole"
+                    class="w-full p-3 mt-2 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]">
+                    <option value="">All Roles</option>
+                    <option value="Combat">Combat</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Medical and Healthcare">Medical and Healthcare</option>
+                    <option value="Intelligence and Cyber">Intelligence and Cyber</option>
+                    <option value="Aviation">Aviation</option>
+                    <option value="Research and Development">Research and Development</option>
+                </select>
+            </div>
+
+            <!-- Experience Filter -->
+            <div>
+                <label for="experience" class="block text-lg font-medium text-[#40534C]">Minimum Experience</label>
+                <input type="number" id="experience" [(ngModel)]="selectedExperience"
+                    class="w-full p-3 mt-2 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    placeholder="Enter years of experience">
+            </div>
+
+            <!-- Salary Filter -->
+            <div>
+                <label for="salary" class="block text-lg font-medium text-[#40534C]">Minimum Salary</label>
+                <input type="number" id="salary" [(ngModel)]="selectedSalary"
+                    class="w-full p-3 mt-2 border border-[#D6BD98] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#66785F]"
+                    placeholder="Enter minimum salary">
+            </div>
+
+            <!-- Apply Filters Button -->
+            <div class="flex items-end">
+                <button (click)="applyFilters()"
+                    class="px-6 py-3 bg-[#1A3636] text-[#D6BD98] rounded-lg hover:bg-[#40534C] font-medium">
+                    Apply Filters
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="isLoading" class="text-center">
+        <p>Loading...</p>
+    </div>
+
+    <!-- Search Results -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12 m-8">
+        <div class="bg-[#B2C9AD] p-8 rounded-lg border border-[#40534C] shadow-lg"
+            *ngFor="let vacancy of filteredVacancies">
+            <div class="flex items-center border-b border-[#677D6A] pb-6 gap-6">
+                <svg class="w-12 h-12 text-[#40534C]" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                    <!-- SVG Path -->
+                </svg>
+                <div>
+                    <h2 [routerLink]="['/vacancy', vacancy.vacancyId]"
+                        class="text-2xl font-bold text-[#1A3636] hover:text-[#40534C] cursor-pointer">{{ vacancy.title
+                        }}
+                    </h2>
+                    <p class="text-lg text-[#40534C]">{{ vacancy.role }}</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-6 text-[#1A3636] mt-6">
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Job type</h1>
+                    <p>Full time</p>
+                </div>
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Salary</h1>
+                    <p>{{ vacancy.salary }}</p>
+                </div>
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Location</h1>
+                    <p>{{ vacancy.location }}</p>
+                </div>
+                <div>
+                    <h1 class="text-md font-semibold text-[#40534C]">Experience</h1>
+                    <p>{{ vacancy.experienceMin }}</p>
+                </div>
+            </div>
+            <div class="flex justify-between items-center mt-6">
+                <div class="rounded-lg px-4 py-2 bg-[#677D6A] text-[#D6BD98] text-sm">
+                    Registrations closed on {{ vacancy.deadline | date: 'longDate' }} - {{ vacancy.deadline | date:
+                    'shortTime' }}
+                </div>
+                <button [routerLink]="['/vacancy', vacancy.vacancyId]"
+                    class="px-6 py-2 bg-[#1A3636] text-[#D6BD98] rounded-lg hover:bg-[#40534C]">
+                    View More
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

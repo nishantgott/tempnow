@@ -1,0 +1,69 @@
+<div class="p-8  bg-[#F5F5E9]">
+    <div class="flex justify-center space-x-16 text-xl font-medium">
+        <!-- Vacancies -->
+        <a [routerLink]="['/vacancy-list']" class="text-[#40534C] hover:text-[#1A3636]">Vacancies</a>
+
+        <!-- Applications -->
+        <a [routerLink]="['/application-list']"
+            class="text-[#1A3636] font-semibold border-b-4 border-[#1A3636] hover:text-[#40534C]">Applications</a>
+
+        <!-- Offers -->
+        <a [routerLink]="['/offer-list']" class="text-[#40534C] hover:text-[#1A3636]">Offers</a>
+    </div>
+</div>
+
+<div class=" bg-[#F5F5E9] grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 p-8">
+    <div class="bg-[#B2C9AD] p-8 rounded-lg border border-[#40534C] shadow-lg w-full h-[450px] flex flex-col justify-between"
+        *ngFor="let vacancy of vacancies2">
+        <!-- Box Title -->
+        <div class="flex items-center border-b border-[#677D6A] pb-4 gap-6">
+            <svg class="w-12 h-12 text-[#40534C]" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                <g>
+                    <path opacity="0.48"
+                        d="M6 8.58268V20.8601C6.00024 20.8973 6.01541 20.9329 6.04222 20.9591C6.06902 20.9853 6.10528 21 6.14307 21H11.2988C11.3367 21 11.3731 20.9852 11.4 20.9588C11.4268 20.9324 11.4419 20.8965 11.4419 20.8592V13.6584C11.4418 13.6211 11.4268 13.5853 11.4 13.559L6.24428 8.4832C6.22429 8.46349 6.1988 8.45006 6.17105 8.44462C6.1433 8.43917 6.11453 8.44194 6.08838 8.45259C6.06224 8.46324 6.03988 8.48128 6.02415 8.50443C6.00842 8.52759 6.00001 8.55482 6 8.58268ZM7.2568 12.1294H8.22718C8.27991 12.1294 8.32265 12.2289 8.32265 12.3516V14.6099C8.32265 14.7327 8.27991 14.8321 8.22718 14.8321H7.2568C7.20407 14.8321 7.16133 14.7327 7.16133 14.6099V12.3516C7.16133 12.2289 7.20407 12.1294 7.2568 12.1294Z"
+                        fill-opacity="0.8" fill="#898989"></path>
+                </g>
+            </svg>
+            <div>
+                <h2 [routerLink]="['/vacancy', vacancy.vacancyId]"
+                    class="text-2xl font-semibold text-[#1A3636] hover:text-[#40534C] cursor-pointer">{{ vacancy.title
+                    }}</h2>
+                <p class="text-lg text-[#40534C]">{{ vacancy.role }}</p>
+            </div>
+        </div>
+
+        <!-- Box Content -->
+        <div class="grid grid-cols-2 gap-6 text-[#1A3636] mt-4">
+            <div>
+                <h1 class="text-sm font-semibold text-[#40534C]">Location</h1>
+                <p>{{ vacancy.location }}</p>
+            </div>
+            <div>
+                <h1 class="text-sm font-semibold text-[#40534C]">Experience</h1>
+                <p>{{ vacancy.experienceMin }}+</p>
+            </div>
+            <div>
+                <h1 class="text-sm font-semibold text-[#40534C]">Salary</h1>
+                <p>{{ vacancy.salary }}</p>
+            </div>
+            <div>
+                <h1 class="text-sm font-semibold text-[#40534C]">Deadline</h1>
+                <p>{{ vacancy.deadline | date }}</p>
+            </div>
+        </div>
+
+        <!-- Application Status -->
+        <div class="mt-4 text-[#1A3636]">
+            <p>Status: <span class="font-semibold text-[#677D6A]">{{ vacancy.applicationStatus }}</span></p>
+        </div>
+
+        <!-- Apply Button -->
+        <div class="mt-4">
+            <button *ngIf="vacancy.applicationStatus === 'Not Applied'"
+                class="bg-[#1A3636] hover:bg-[#40534C] text-[#D6BD98] font-semibold py-3 px-6 rounded-lg w-full">Apply
+                Now</button>
+            <button *ngIf="vacancy.applicationStatus !== 'Not Applied'"
+                class="bg-[#677D6A] text-[#D6BD98] font-semibold py-3 px-6 rounded-lg w-full" disabled>Applied</button>
+        </div>
+    </div>
+</div>
